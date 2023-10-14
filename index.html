@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Conversor de temperatura</title>
+</head>
+<body>
+  <div class="container">
+  <div id="coisa">  <h1>Conversor de Temperatura</h1>
+    <input type="number" id="tempInput" placeholder="Digite a temperatura">
+    <select id="fromUnit">
+        <option value="celsius">Celsius (°C)</option>
+        <option value="fahrenheit">Fahrenheit (°F)</option>
+        <option value="kelvin">Kelvin (K)</option>
+        <option value="rankine">Rankine (R)</option>
+    </select>
+    <button id="convertButton">Converter</button>
+    <div id="result"></div></div>
+</div>
+
+<script> 
+  document.getElementById("convertButton").addEventListener("click", function() {
+    const tempInput = parseFloat(document.getElementById("tempInput").value);
+    const unidade = document.getElementById("fromUnit").value;
+    const resultado = document.getElementById("result");
+
+    if (isNaN(tempInput)) {
+        resultado.textContent = "Por favor, insira uma temperatura válida.";
+    } else {
+        let result;
+
+        if (unidade=== "celsius") {
+          
+            const fahrenheit = (tempInput * 9/5) + 32;
+            const kelvin = tempInput + 273.15;
+            const rankine = (tempInput + 273.15) * 9/5;
+
+            result = `Fahrenheit: ${fahrenheit} °F<br> 
+                      Kelvin: ${kelvin} K<br> 
+                      Rankine: ${rankine} R`;
+        } 
+        else if (unidade === "fahrenheit") {
+          
+            const celsius = (tempInput - 32) * 5/9;
+            const kelvin =(tempInput+ 459.67) * 5/9
+            const rankine = tempInput + 459.67;
+
+          result = `celsius: ${celsius} °c<br> 
+                      Kelvin: ${kelvin} K<br> 
+                      Rankine: ${rankine} R`;
+            // Adicione as conversões apropriadas daqui para Fahrenheit
+         }
+        else if (unidade === "kelvin") {
+            const fahrenheit = (tempInput * 9/5) - 459.67;
+            const celsius = tempInput - 273.15;
+            const rankine = (tempInput + 273.15) * 9/5;
+
+            result = `Fahrenheit: ${fahrenheit} °F<br> 
+                      celsius: ${celsius} °c<br> 
+                      Rankine: ${rankine} R`;
+                      // Adicione as conversões apropriadas daqui para Kelvin
+        } 
+        else if (unidade === "rankine") {
+            const fahrenheit = tempInput ;
+            const kelvin = tempInput + 273.15;
+            const celsius = (tempInput - 491.67) * 5/9;
+
+            result = `Fahrenheit: ${fahrenheit} °F<br> 
+                      Kelvin: ${kelvin} K<br> 
+                      celsius: ${celsius} °c`;  
+          // Adicione as conversões apropriadas daqui para Rankine
+        } 
+        else {
+            result = "Unidade de temperatura não suportada.";
+        }
+
+        resultado.innerHTML = result;
+    }
+  
+    }  );
+</script>
+
+</body>
+</html>
